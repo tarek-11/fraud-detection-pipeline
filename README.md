@@ -41,49 +41,35 @@ Fraud detection requires intelligent systems that not only catch fraud as it hap
    bin/kafka-topics.sh --create --topic transactions --bootstrap-server localhost:9092
    bin/kafka-topics.sh --create --topic fraud-alerts --bootstrap-server localhost:9092
 
-## Architecture
 
-```plaintext
-+-------------------+    +-------------------------+
-| Banking Systems   |    | User Behavior Simulation|
-| (Transaction Flow)|    | (Kafka Producer)        |
-+-------------------+    +-------------------------+
-           |                          |
-           v                          v
-      +-------------+        +------------------+
-      |    Kafka    | <------| Real-time Stream |
-      +-------------+        +------------------+
-           |
-           v
-+------------------------------+
-| Spark Structured Streaming   |
-| - Rule-based fraud detection |
-+------------------------------+
-           |
-           +---------------------> Kafka Topic: fraud-alerts
-           |
-           v
-+------------------------+
-| Hadoop HDFS Storage    |
-| - Raw & processed data |
-+------------------------+
-           |
-           v
-     +--------------------+
-     |   Spark Batch Jobs |
-     |   (via Airflow)    |
-     +--------------------+
-           |
-           v
-     +-----------+
-     |   Trino   |
-     | (SQL over |
-     |   HDFS)   |
-     +-----------+
-           |
-           v
-     +----------------+
-     | BI Dashboards  |
-     |   & Analysts   |
-     +----------------+
+## Fraud Detection Rules
+
+| Rule Type     | Description               | Threshold       |
+|---------------|---------------------------|-----------------|
+| Amount        | High-value transaction    | > $5,000        |
+| Frequency     | Multiple transactions     | 5+ in 10 min    |
+| Location      | Geographic dispersion     | 2+ countries in 30 min |
+| New Account   | First large purchase      | > $1,000        |
+| Chargebacks   | Multiple refunds          | 3+ in 7 days    |
+
+## ML Integration (Optional)
+
+- Historical fraud data training
+- Real-time prediction API
+- Model scoring in Spark
+- Continuous model updates
+
+## Future Enhancements
+
+- Deploy ML-based fraud classifier
+- Add Docker containerization
+- Implement real-time dashboards
+- Add geolocation-based rules
+- Enhance API security
+
+## Author
+
+Built with ❤️ by [Mohamed Tarek]
+- GitHub: [https://github.com/tarek-11]
+- LinkedIn: [(https://www.linkedin.com/in/tarek11/]
 

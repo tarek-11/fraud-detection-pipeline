@@ -16,7 +16,7 @@ Fraud detection requires intelligent systems that not only catch fraud as it hap
 - SQL-based investigation with Trino
 - Ready for ML model integration
 
-  ### Prerequisites
+### Prerequisites
 
 - Java 8+
 - Python 3.8+
